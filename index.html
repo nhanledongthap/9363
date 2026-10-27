@@ -101,7 +101,7 @@
           <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
         </span>
         <span class="font-semibold text-bhx-green-dark">Dữ liệu Retime trực tiếp:</span>
-        <span id="banner-report-date">Ngày 25/03/2026</span>
+        <span id="banner-report-date">Ngày 25/10/2026</span>
         <span id="custom-data-badge" class="hidden bg-emerald-100 text-emerald-800 text-[10px] font-bold px-1.5 py-0.5 rounded">
           Dữ liệu đã cập nhật
         </span>
@@ -142,9 +142,15 @@
           <div class="text-xl sm:text-2xl font-extrabold text-bhx-green-dark font-mono tracking-tight" id="stat-total-luyke">
             27.651.350.000 đ
           </div>
-          <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
-            <span>Base: <b class="font-mono text-slate-700" id="stat-total-base">31.340.000.000 đ</b></span>
-            <span class="font-bold text-bhx-green bg-emerald-50 px-2 py-0.5 rounded text-[11px]" id="stat-avg-percent">88,23%</span>
+          <div class="mt-2.5 pt-2 border-t border-slate-100 space-y-1 text-xs text-slate-600">
+            <div class="flex items-center justify-between">
+              <span>Base: <b class="font-mono text-slate-700" id="stat-total-base">31.340.000.000 đ</b></span>
+              <span class="font-bold text-bhx-green bg-emerald-50 px-2 py-0.5 rounded text-[11px]" id="stat-avg-percent">88,23%</span>
+            </div>
+            <div class="flex items-center justify-between text-[11px] pt-0.5 border-t border-slate-50">
+              <span class="text-slate-500 font-medium">Còn lại hoàn thành Base:</span>
+              <span class="font-mono font-bold text-rose-600" id="stat-total-conlai">3.688.650.000 đ</span>
+            </div>
           </div>
         </div>
 
@@ -194,36 +200,10 @@
             7.680 <span class="text-sm font-normal text-slate-500">Hóa đơn</span>
           </div>
           <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
-            <span>Còn lại Base:</span>
-            <span class="font-mono font-bold text-rose-600" id="stat-total-conlai">3.688.650.000 đ</span>
+            <span>Trung bình / Siêu thị:</span>
+            <span class="font-mono font-bold text-bhx-green" id="stat-avg-bills">257 bills/ngày</span>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- COLUMN CHART -->
-    <section class="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-emerald-900/10">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-100">
-        <div>
-          <h2 class="text-base sm:text-lg font-bold text-bhx-green-dark flex items-center gap-2">
-            <svg class="w-5 h-5 text-bhx-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-            Biểu Đồ Top Siêu Thị Doanh Thu Cao Nhất
-          </h2>
-          <p class="text-xs text-slate-500 mt-0.5">So sánh hiệu quả bán hàng giữa các chi nhánh dẫn đầu chuỗi Bách Hóa Xanh An Giang</p>
-        </div>
-
-        <div class="flex items-center gap-1.5 p-1 bg-slate-100 rounded-lg text-xs font-semibold self-start sm:self-auto">
-          <button id="btn-chart-luyke" onclick="switchChartMode('luyke')" class="px-3 py-1.5 rounded-md transition shadow-xs bg-bhx-green text-white">
-            Top Lũy Kế
-          </button>
-          <button id="btn-chart-today" onclick="switchChartMode('today')" class="px-3 py-1.5 rounded-md transition text-slate-600 hover:text-slate-900">
-            Top Retime Hôm Nay
-          </button>
-        </div>
-      </div>
-
-      <div class="relative w-full h-[320px] sm:h-[380px]">
-        <canvas id="topRevenueChart"></canvas>
       </div>
     </section>
 
@@ -247,18 +227,139 @@
         <button onclick="setTierFilter('3 Tỷ -> <5 Tỷ')" data-tier="3 Tỷ -> <5 Tỷ" class="tier-btn px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200">3 - 5 Tỷ</button>
         <button onclick="setTierFilter('1.2 Tỷ -> <2 Tỷ')" data-tier="1.2 Tỷ -> <2 Tỷ" class="tier-btn px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200">1.2 - 2 Tỷ</button>
       </div>
+
+      <!-- View Tab Selector for 3 Tables -->
+      <div class="flex items-center gap-1 p-1 bg-slate-100 rounded-lg text-xs font-semibold self-start md:self-auto">
+        <button id="view-tab-all" onclick="setViewMode('all')" class="px-2.5 py-1 rounded-md transition bg-white text-slate-900 shadow-xs font-bold">
+          Tất Cả 3 Bảng
+        </button>
+        <button id="view-tab-chart" onclick="setViewMode('chart')" class="px-2.5 py-1 rounded-md transition text-slate-600 hover:text-slate-900">
+          Bảng 1 (Biểu Đồ)
+        </button>
+        <button id="view-tab-retime" onclick="setViewMode('retime')" class="px-2.5 py-1 rounded-md transition text-slate-600 hover:text-slate-900">
+          Bảng 2 (Retime)
+        </button>
+        <button id="view-tab-luyke" onclick="setViewMode('luyke')" class="px-2.5 py-1 rounded-md transition text-slate-600 hover:text-slate-900">
+          Bảng 3 (Lũy Kế)
+        </button>
+      </div>
     </section>
 
-    <!-- TABLES SECTION -->
+    <!-- 3 BẢNG THEO THỨ TỰ: BẢNG 1 BIỂU ĐỒ -> BẢNG 2 RETIME HÔM NAY -> BẢNG 3 LŨY KẾ -->
     <div class="space-y-6">
 
-      <!-- BẢNG 1: LŨY KẾ DOANH THU -->
-      <section class="bg-white rounded-xl shadow-sm border border-emerald-900/10 overflow-hidden">
+      <!-- BẢNG 1: BIỂU ĐỒ SO SÁNH THỰC HIỆN VS BASE TẤT CẢ SIÊU THỊ -->
+      <section id="section-bang-1" class="bg-white rounded-xl shadow-sm border border-emerald-900/10 overflow-hidden">
+        <div class="bg-gradient-to-r from-emerald-900 via-bhx-green-dark to-bhx-green px-4 sm:px-6 py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3 border-b-2 border-bhx-yellow">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-bhx-yellow text-bhx-green-dark">
+                BẢNG 1
+              </span>
+              <h3 class="text-sm sm:text-base font-bold text-white tracking-tight flex items-center gap-2">
+                <svg class="w-4 h-4 text-bhx-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                Biểu Đồ So Sánh Thực Hiện vs Base Tất Cả Siêu Thị (<span id="chart-store-count">21</span> Siêu Thị)
+              </h3>
+            </div>
+            <p class="text-xs text-emerald-100 mt-0.5">
+              Hiển thị Cột Base, Cột Thực hiện và % hoàn thành trên đỉnh mỗi cột · Rà chuột vào cột để xem chi tiết
+            </p>
+          </div>
+
+          <div class="flex items-center gap-1 p-1 bg-white/10 rounded-lg text-xs font-semibold self-start md:self-auto border border-white/15">
+            <button id="btn-chart-luyke" onclick="switchChartMode('luyke')" class="px-3 py-1.5 rounded-md transition bg-bhx-yellow text-bhx-green-dark font-bold shadow-xs">
+              Thực Hiện Lũy Kế vs Base
+            </button>
+            <button id="btn-chart-today" onclick="switchChartMode('today')" class="px-3 py-1.5 rounded-md transition text-white hover:bg-white/15">
+              Hôm Nay vs Target Ngày
+            </button>
+            <button id="btn-chart-percent" onclick="switchChartMode('percent')" class="px-3 py-1.5 rounded-md transition text-white hover:bg-white/15">
+              % Tiến Độ
+            </button>
+          </div>
+        </div>
+
+        <div class="p-4 sm:p-5">
+          <div class="w-full overflow-x-auto custom-scrollbar pb-2">
+            <div class="relative w-full min-w-[850px] sm:min-w-[1050px] h-[360px] sm:h-[400px]">
+              <canvas id="topRevenueChart"></canvas>
+            </div>
+          </div>
+          <div class="mt-3 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between text-xs text-slate-500 gap-2">
+            <div class="flex items-center gap-4">
+              <span class="flex items-center gap-1.5">
+                <span class="w-3 h-3 rounded-xs bg-[#cbd5e1] inline-block"></span>
+                <span>Cột Base (Chỉ tiêu)</span>
+              </span>
+              <span class="flex items-center gap-1.5">
+                <span class="w-3 h-3 rounded-xs bg-bhx-green inline-block"></span>
+                <span class="font-semibold text-bhx-green-dark">Cột Thực hiện (Doanh thu)</span>
+              </span>
+              <span class="flex items-center gap-1.5">
+                <span class="text-[10px] font-bold text-bhx-green-dark bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">90.0%</span>
+                <span>% Hoàn thành trên đầu cột</span>
+              </span>
+            </div>
+            <div class="text-[11px] text-slate-400">
+              * Kéo thanh cuộn ngang để xem trọn vẹn tất cả 21 siêu thị
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BẢNG 2: BÁO CÁO RETIME DOANH THU HÔM NAY (ĐƯỢC ĐƯA LÊN TRÊN THEO YÊU CẦU) -->
+      <section id="section-bang-2" class="bg-white rounded-xl shadow-sm border border-emerald-900/10 overflow-hidden">
+        <div class="bg-gradient-to-r from-amber-700 to-amber-600 px-4 sm:px-6 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b-2 border-bhx-yellow">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-bhx-yellow text-amber-900">
+                BẢNG 2
+              </span>
+              <h3 class="text-sm sm:text-base font-bold text-white tracking-tight flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-bhx-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Báo Cáo Retime Doanh Thu Hôm Nay
+              </h3>
+            </div>
+            <p class="text-xs text-amber-100 mt-0.5">Doanh số thời gian thực ngày hôm nay (kênh Offline & Online)</p>
+          </div>
+          <div class="flex items-center gap-2 text-xs text-amber-100 font-medium">
+            <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Retime trực tiếp từ POS</span>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto custom-scrollbar">
+          <table class="w-full text-left text-xs sm:text-sm">
+            <thead class="bg-amber-50/60 text-slate-700 uppercase text-[11px] font-bold tracking-wider border-b border-amber-200">
+              <tr>
+                <th scope="col" class="py-3 px-3 text-center w-14">Xếp hạng</th>
+                <th scope="col" class="py-3 px-4">Tên Siêu Thị & Mã ĐN</th>
+                <th scope="col" class="py-3 px-4 text-right">DT Offline (VNĐ)</th>
+                <th scope="col" class="py-3 px-4 text-right">DT Online (VNĐ)</th>
+                <th scope="col" class="py-3 px-4 text-right font-extrabold text-amber-900">Tổng DT Hôm Nay (VNĐ)</th>
+                <th scope="col" class="py-3 px-3 text-center w-28">Số Bill</th>
+              </tr>
+            </thead>
+            <tbody id="table-retime-body" class="divide-y divide-slate-100 text-slate-700"></tbody>
+            <tfoot class="bg-amber-100/60 font-bold border-t-2 border-amber-500 text-xs sm:text-sm">
+              <tr id="table-retime-foot"></tr>
+            </tfoot>
+          </table>
+        </div>
+      </section>
+
+      <!-- BẢNG 3: BÁO CÁO LŨY KẾ DOANH THU KHU VỰC (ĐƯỢC ĐƯA XUỐNG DƯỚI THEO YÊU CẦU) -->
+      <section id="section-bang-3" class="bg-white rounded-xl shadow-sm border border-emerald-900/10 overflow-hidden">
         <div class="bg-gradient-to-r from-bhx-green-dark to-bhx-green px-4 sm:px-6 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b-2 border-bhx-yellow">
           <div>
             <div class="flex items-center gap-2">
-              <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-bhx-yellow text-bhx-green-dark">BẢNG 1</span>
-              <h3 class="text-sm sm:text-base font-bold text-white tracking-tight">Báo Cáo Lũy Kế Doanh Thu Khu Vực</h3>
+              <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-bhx-yellow text-bhx-green-dark">
+                BẢNG 3
+              </span>
+              <h3 class="text-sm sm:text-base font-bold text-white tracking-tight flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-bhx-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+                Báo Cáo Lũy Kế Doanh Thu Khu Vực
+              </h3>
             </div>
             <p class="text-xs text-emerald-100 mt-0.5">Theo dõi chỉ tiêu Base, doanh thu thực hiện lũy kế và tỷ lệ hoàn thành</p>
           </div>
@@ -287,46 +388,9 @@
         </div>
       </section>
 
-      <!-- BẢNG 2: RETIME DOANH THU HÔM NAY -->
-      <section class="bg-white rounded-xl shadow-sm border border-emerald-900/10 overflow-hidden">
-        <div class="bg-gradient-to-r from-amber-700 to-amber-600 px-4 sm:px-6 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b-2 border-bhx-yellow">
-          <div>
-            <div class="flex items-center gap-2">
-              <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-bhx-yellow text-amber-900">BẢNG 2</span>
-              <h3 class="text-sm sm:text-base font-bold text-white tracking-tight">Báo Cáo Retime Doanh Thu Hôm Nay</h3>
-            </div>
-            <p class="text-xs text-amber-100 mt-0.5">Doanh số thời gian thực (chi tiết Offline & Online)</p>
-          </div>
-          <div class="flex items-center gap-2 text-xs text-amber-100">
-            <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>Dữ liệu Retime trực tiếp</span>
-          </div>
-        </div>
-
-        <div class="overflow-x-auto custom-scrollbar">
-          <table class="w-full text-left text-xs sm:text-sm">
-            <thead class="bg-slate-50 text-slate-600 uppercase text-[11px] font-bold tracking-wider border-b border-slate-200">
-              <tr>
-                <th scope="col" class="py-3 px-3 text-center w-14">Xếp hạng</th>
-                <th scope="col" class="py-3 px-4">Tên Siêu Thị & Mã ĐN</th>
-                <th scope="col" class="py-3 px-4 text-right">DT Offline (VNĐ)</th>
-                <th scope="col" class="py-3 px-4 text-right">DT Online (VNĐ)</th>
-                <th scope="col" class="py-3 px-4 text-right text-bhx-green-dark font-extrabold">Tổng Doanh Thu VNĐ</th>
-                <th scope="col" class="py-3 px-3 text-center">Số Hóa Đơn</th>
-              </tr>
-            </thead>
-            <tbody id="table-retime-body" class="divide-y divide-slate-100 text-slate-700"></tbody>
-            <tfoot class="bg-amber-50/80 font-bold border-t-2 border-amber-600 text-xs sm:text-sm">
-              <tr id="table-retime-foot"></tr>
-            </tfoot>
-          </table>
-        </div>
-      </section>
-
     </div>
-  </main>
 
-  <!-- MODAL CẬP NHẬT DATA MỚI -->
+    <!-- MODAL CẬP NHẬT DATA MỚI -->
   <div id="import-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-black/60 backdrop-blur-xs">
     <div class="relative w-full max-w-4xl bg-white rounded-2xl shadow-2xl flex flex-col max-h-[92vh] overflow-hidden border border-slate-200">
       
@@ -488,37 +552,401 @@
   <!-- SCRIPT LOGIC & CHART -->
   <script>
     // Dữ liệu mặc định 21 siêu thị (Khớp chuẩn xác báo cáo 25/10/2026)
+    const OFFICIAL_OCTOBER_BASE = {
+  "4684": 1618695985,
+  "4687": 2112759295,
+  "5019": 2783888016,
+  "5118": 2979462900,
+  "5806": 2997892666,
+  "6119": 4388456841,
+  "6220": 4404285551,
+  "7140": 2754516949,
+  "8653": 2740370926,
+  "8873": 1485990436,
+  "9307": 1467549673,
+  "9376": 1305367509,
+  "10070": 2115314759,
+  "15033": 1203546592,
+  "27944": 1237589316,
+  "29756": 1066818791,
+  "29909": 908330767,
+  "30256": 2521968912,
+  "30455": 789862611,
+  "35547": 850500000,
+  "35562": 1000000000
+};
     const DEFAULT_SUPERMARKETS = [
-      { rankLuyKe: 1, rankRetime: 1, code: "6220", name: "BHX_AGI_TBI - Thửa 206 Nhà Bàng", shortName: "Thửa 206 Nhà Bàng", tier: "3 Tỷ -> <5 Tỷ", thucHien: 2160500000, base: 2400000000, percentComplete: 90.02, conLai: 239500000, dtOfflineToday: 77701446, dtOnlineToday: 13185248, tongDtToday: 90886694, totalBillsToday: 596 },
-      { rankLuyKe: 2, rankRetime: 2, code: "6119", name: "BHX_AGI_TTO - Thửa 368 Tri Tôn", shortName: "Thửa 368 Tri Tôn", tier: "5 Tỷ -> <8 Tỷ", thucHien: 2450800000, base: 2800000000, percentComplete: 87.53, conLai: 349200000, dtOfflineToday: 58525221, dtOnlineToday: 19109175, tongDtToday: 77634396, totalBillsToday: 432 },
-      { rankLuyKe: 3, rankRetime: 4, code: "5806", name: "BHX_AGI_TBI - Lộ 17 Chi Lăng", shortName: "Lộ 17 Chi Lăng", tier: "3 Tỷ -> <5 Tỷ", thucHien: 1720400000, base: 1850000000, percentComplete: 92.99, conLai: 129600000, dtOfflineToday: 59730257, dtOnlineToday: 3027675, tongDtToday: 62757932, totalBillsToday: 444 },
-      { rankLuyKe: 4, rankRetime: 3, code: "5019", name: "BHX_AGI_TBI - Thửa 74 Tịnh Biên", shortName: "Thửa 74 Tịnh Biên", tier: "3 Tỷ -> <5 Tỷ", thucHien: 1685300000, base: 1850000000, percentComplete: 91.10, conLai: 164700000, dtOfflineToday: 43693615, dtOnlineToday: 27292088, tongDtToday: 70985703, totalBillsToday: 369 },
-      { rankLuyKe: 5, rankRetime: 5, code: "10070", name: "BHX_AGI_CPH - Thạnh Mỹ Tây", shortName: "Thạnh Mỹ Tây", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 1420600000, base: 1550000000, percentComplete: 91.65, conLai: 129400000, dtOfflineToday: 38043402, dtOnlineToday: 24891676, tongDtToday: 62935078, totalBillsToday: 340 },
-      { rankLuyKe: 6, rankRetime: 6, code: "30256", name: "BHX_AGI_CDA - Cần Đăng", shortName: "Cần Đăng", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 1295400000, base: 1450000000, percentComplete: 89.34, conLai: 154600000, dtOfflineToday: 47074581, dtOnlineToday: 2855828, tongDtToday: 49930409, totalBillsToday: 379 },
-      { rankLuyKe: 7, rankRetime: 7, code: "8653", name: "BHX_AGI_TTO - Trần Hưng Đạo", shortName: "Trần Hưng Đạo", tier: "3 Tỷ -> <5 Tỷ", thucHien: 1380700000, base: 1550000000, percentComplete: 89.08, conLai: 169300000, dtOfflineToday: 47517101, dtOnlineToday: 1164678, tongDtToday: 48681779, totalBillsToday: 286 },
-      { rankLuyKe: 8, rankRetime: 8, code: "5118", name: "BHX_AGI_CTH - Thửa 17 Vĩnh Bình", shortName: "Thửa 17 Vĩnh Bình", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 1264200000, base: 1400000000, percentComplete: 90.30, conLai: 135800000, dtOfflineToday: 46748159, dtOnlineToday: 1316422, tongDtToday: 48064581, totalBillsToday: 333 },
-      { rankLuyKe: 9, rankRetime: 9, code: "7140", name: "BHX_AGI_TTO - Ngã Tự Lợi (Ba Chúc)", shortName: "Ngã Tự Lợi (Ba Chúc)", tier: "3 Tỷ -> <5 Tỷ", thucHien: 1340500000, base: 1500000000, percentComplete: 89.37, conLai: 159500000, dtOfflineToday: 46279047, dtOnlineToday: 1689135, tongDtToday: 47968182, totalBillsToday: 341 },
-      { rankLuyKe: 10, rankRetime: 10, code: "29756", name: "BHX_AGI_VTT - Chợ Kênh 7", shortName: "Chợ Kênh 7", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 980400000, base: 1100000000, percentComplete: 89.13, conLai: 119600000, dtOfflineToday: 21209911, dtOnlineToday: 13343852, tongDtToday: 34553763, totalBillsToday: 221 },
-      { rankLuyKe: 11, rankRetime: 12, code: "9307", name: "BHX_AGI_LXU - Mỹ Hòa Hưng", shortName: "Mỹ Hòa Hưng", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 890500000, base: 1020000000, percentComplete: 87.30, conLai: 129500000, dtOfflineToday: 24651006, dtOnlineToday: 7730844, tongDtToday: 32381850, totalBillsToday: 215 },
-      { rankLuyKe: 12, rankRetime: 13, code: "4687", name: "BHX_AGI_LXU - Thửa 1615 Mỹ Quý", shortName: "Thửa 1615 Mỹ Quý", tier: "3 Tỷ -> <5 Tỷ", thucHien: 920400000, base: 1050000000, percentComplete: 87.66, conLai: 129600000, dtOfflineToday: 29812639, dtOnlineToday: 2189929, tongDtToday: 32002568, totalBillsToday: 250 },
-      { rankLuyKe: 13, rankRetime: 14, code: "8873", name: "BHX_AGI_TBI - An Hảo", shortName: "An Hảo", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 885200000, base: 1020000000, percentComplete: 86.78, conLai: 134800000, dtOfflineToday: 30133686, dtOnlineToday: 1561314, tongDtToday: 31695000, totalBillsToday: 179 },
-      { rankLuyKe: 14, rankRetime: 15, code: "4684", name: "BHX_AGI_CPH - Thửa 145 Vĩnh Thuận (Chợ Vịnh Tre)", shortName: "Chợ Vịnh Tre", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 870100000, base: 1000000000, percentComplete: 87.01, conLai: 129900000, dtOfflineToday: 25458134, dtOnlineToday: 5702835, tongDtToday: 31160969, totalBillsToday: 245 },
-      { rankLuyKe: 15, rankRetime: 11, code: "29909", name: "BHX_AGI_VHA - Vĩnh Nhuận", shortName: "Vĩnh Nhuận", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 825000000, base: 950000000, percentComplete: 86.84, conLai: 125000000, dtOfflineToday: 16296574, dtOnlineToday: 11286364, tongDtToday: 27582938, totalBillsToday: 182 },
-      { rankLuyKe: 16, rankRetime: 16, code: "9376", name: "BHX_AGI_TTO - Lương An Trà (Giồng Cát)", shortName: "Lương An Trà (Giồng Cát)", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 795400000, base: 920000000, percentComplete: 86.46, conLai: 124600000, dtOfflineToday: 10012708, dtOnlineToday: 17533419, tongDtToday: 27546127, totalBillsToday: 98 },
-      { rankLuyKe: 17, rankRetime: 17, code: "27944", name: "BHX_AGI_VGI - Vĩnh Gia", shortName: "Vĩnh Gia", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 760200000, base: 880000000, percentComplete: 86.39, conLai: 119800000, dtOfflineToday: 23519632, dtOnlineToday: 1070371, tongDtToday: 24590003, totalBillsToday: 165 },
-      { rankLuyKe: 18, rankRetime: 18, code: "15033", name: "BHX_AGI_LXU - Bình Đức", shortName: "Bình Đức", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 680500000, base: 820000000, percentComplete: 82.99, conLai: 139500000, dtOfflineToday: 12064402, dtOnlineToday: 5851793, tongDtToday: 17916195, totalBillsToday: 122 },
-      { rankLuyKe: 19, rankRetime: 19, code: "35547", name: "BHX_AGI_CTO - Chợ Cỏ Tô", shortName: "Chợ Cỏ Tô", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 650000000, base: 780000000, percentComplete: 83.33, conLai: 130000000, dtOfflineToday: 10233433, dtOnlineToday: 7248767, tongDtToday: 17482200, totalBillsToday: 115 },
-      { rankLuyKe: 20, rankRetime: 20, code: "35562", name: "BHX_AGI_CTO - Chợ Tà Đảnh", shortName: "Chợ Tà Đảnh", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 660200000, base: 790000000, percentComplete: 83.57, conLai: 129800000, dtOfflineToday: 17368586, dtOnlineToday: 95939, tongDtToday: 17464525, totalBillsToday: 168 },
-      { rankLuyKe: 21, rankRetime: 21, code: "30455", name: "BHX_AGI_ACU - Văn Giáo", shortName: "Văn Giáo", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 640100000, base: 770000000, percentComplete: 83.13, conLai: 129900000, dtOfflineToday: 10309227, dtOnlineToday: 6476492, tongDtToday: 16785719, totalBillsToday: 115 }
-    ];
+  {
+    "rankLuyKe": 1,
+    "rankRetime": 1,
+    "code": "6220",
+    "name": "BHX_AGI_TBI - Thửa 206 Nhà Bàng",
+    "shortName": "Thửa 206 Nhà Bàng",
+    "tier": "3 Tỷ -> <5 Tỷ",
+    "thucHien": 4031385410,
+    "base": 4404285551,
+    "percentComplete": 91.53,
+    "conLai": 372900141,
+    "dtOfflineToday": 77701446,
+    "dtOnlineToday": 13185248,
+    "tongDtToday": 90886694,
+    "totalBillsToday": 596
+  },
+  {
+    "rankLuyKe": 2,
+    "rankRetime": 2,
+    "code": "6119",
+    "name": "BHX_AGI_TTO - Thửa 368 Tri Tôn",
+    "shortName": "Thửa 368 Tri Tôn",
+    "tier": "3 Tỷ -> <5 Tỷ",
+    "thucHien": 4439818318,
+    "base": 4388456841,
+    "percentComplete": 101.17,
+    "conLai": 0,
+    "dtOfflineToday": 58525221,
+    "dtOnlineToday": 19109175,
+    "tongDtToday": 77634396,
+    "totalBillsToday": 432
+  },
+  {
+    "rankLuyKe": 3,
+    "rankRetime": 4,
+    "code": "5806",
+    "name": "BHX_AGI_TBI - Lô 17 Chi Lăng",
+    "shortName": "Lô 17 Chi Lăng",
+    "tier": "3 Tỷ -> <5 Tỷ",
+    "thucHien": 2755200000,
+    "base": 2997892666,
+    "percentComplete": 91.9,
+    "conLai": 242692666,
+    "dtOfflineToday": 59730257,
+    "dtOnlineToday": 3027675,
+    "tongDtToday": 62757932,
+    "totalBillsToday": 444
+  },
+  {
+    "rankLuyKe": 4,
+    "rankRetime": 8,
+    "code": "5118",
+    "name": "BHX_AGI_CTH - Thửa 17 Vĩnh Bình",
+    "shortName": "Thửa 17 Vĩnh Bình",
+    "tier": "3 Tỷ -> <5 Tỷ",
+    "thucHien": 2690000000,
+    "base": 2979462900,
+    "percentComplete": 90.28,
+    "conLai": 289462900,
+    "dtOfflineToday": 46748159,
+    "dtOnlineToday": 1316422,
+    "tongDtToday": 48064581,
+    "totalBillsToday": 333
+  },
+  {
+    "rankLuyKe": 5,
+    "rankRetime": 3,
+    "code": "5019",
+    "name": "BHX_AGI_TBI - Thửa 74 Tịnh Biên",
+    "shortName": "Thửa 74 Tịnh Biên",
+    "tier": "3 Tỷ -> <5 Tỷ",
+    "thucHien": 2542000000,
+    "base": 2783888016,
+    "percentComplete": 91.31,
+    "conLai": 241888016,
+    "dtOfflineToday": 43693615,
+    "dtOnlineToday": 27292088,
+    "tongDtToday": 70985703,
+    "totalBillsToday": 369
+  },
+  {
+    "rankLuyKe": 6,
+    "rankRetime": 9,
+    "code": "7140",
+    "name": "BHX_AGI_TTO - Ngô Tự Lợi (Ba Chúc)",
+    "shortName": "Ngô Tự Lợi (Ba Chúc)",
+    "tier": "3 Tỷ -> <5 Tỷ",
+    "thucHien": 2496000000,
+    "base": 2754516949,
+    "percentComplete": 90.61,
+    "conLai": 258516949,
+    "dtOfflineToday": 46279047,
+    "dtOnlineToday": 1689135,
+    "tongDtToday": 47968182,
+    "totalBillsToday": 341
+  },
+  {
+    "rankLuyKe": 7,
+    "rankRetime": 7,
+    "code": "8653",
+    "name": "BHX_AGI_TTO - Trần Hưng Đạo",
+    "shortName": "Trần Hưng Đạo",
+    "tier": "3 Tỷ -> <5 Tỷ",
+    "thucHien": 2468000000,
+    "base": 2740370926,
+    "percentComplete": 90.06,
+    "conLai": 272370926,
+    "dtOfflineToday": 47517101,
+    "dtOnlineToday": 1164678,
+    "tongDtToday": 48681779,
+    "totalBillsToday": 286
+  },
+  {
+    "rankLuyKe": 8,
+    "rankRetime": 6,
+    "code": "30256",
+    "name": "BHX_AGI_CDA - Cần Đăng",
+    "shortName": "Cần Đăng",
+    "tier": "3 Tỷ -> <5 Tỷ",
+    "thucHien": 2262000000,
+    "base": 2521968912,
+    "percentComplete": 89.69,
+    "conLai": 259968912,
+    "dtOfflineToday": 47074581,
+    "dtOnlineToday": 2855828,
+    "tongDtToday": 49930409,
+    "totalBillsToday": 379
+  },
+  {
+    "rankLuyKe": 9,
+    "rankRetime": 5,
+    "code": "10070",
+    "name": "BHX_AGI_CPH - Thạnh Mỹ Tây",
+    "shortName": "Thạnh Mỹ Tây",
+    "tier": "3 Tỷ -> <5 Tỷ",
+    "thucHien": 1935000000,
+    "base": 2115314759,
+    "percentComplete": 91.48,
+    "conLai": 180314759,
+    "dtOfflineToday": 38043402,
+    "dtOnlineToday": 24891676,
+    "tongDtToday": 62935078,
+    "totalBillsToday": 340
+  },
+  {
+    "rankLuyKe": 10,
+    "rankRetime": 13,
+    "code": "4687",
+    "name": "BHX_AGI_LXU - Thửa 1615 Mỹ Quý",
+    "shortName": "Thửa 1615 Mỹ Quý",
+    "tier": "3 Tỷ -> <5 Tỷ",
+    "thucHien": 1886000000,
+    "base": 2112759295,
+    "percentComplete": 89.27,
+    "conLai": 226759295,
+    "dtOfflineToday": 29812639,
+    "dtOnlineToday": 2189929,
+    "tongDtToday": 32002568,
+    "totalBillsToday": 250
+  },
+  {
+    "rankLuyKe": 11,
+    "rankRetime": 15,
+    "code": "4684",
+    "name": "BHX_AGI_CPH - Thửa 145 Vĩnh Thuận (Chợ Vĩnh Thuận)",
+    "shortName": "Chợ Vĩnh Thuận",
+    "tier": "1.2 Tỷ -> <2 Tỷ",
+    "thucHien": 1421000000,
+    "base": 1618695985,
+    "percentComplete": 87.79,
+    "conLai": 197695985,
+    "dtOfflineToday": 25458134,
+    "dtOnlineToday": 5702835,
+    "tongDtToday": 31160969,
+    "totalBillsToday": 245
+  },
+  {
+    "rankLuyKe": 12,
+    "rankRetime": 14,
+    "code": "8873",
+    "name": "BHX_AGI_TBI - An Hảo",
+    "shortName": "An Hảo",
+    "tier": "1.2 Tỷ -> <2 Tỷ",
+    "thucHien": 1302000000,
+    "base": 1485990436,
+    "percentComplete": 87.62,
+    "conLai": 183990436,
+    "dtOfflineToday": 30133686,
+    "dtOnlineToday": 1561314,
+    "tongDtToday": 31695000,
+    "totalBillsToday": 179
+  },
+  {
+    "rankLuyKe": 13,
+    "rankRetime": 12,
+    "code": "9307",
+    "name": "BHX_AGI_LXU - Mỹ Hòa Hưng",
+    "shortName": "Mỹ Hòa Hưng",
+    "tier": "1.2 Tỷ -> <2 Tỷ",
+    "thucHien": 1285000000,
+    "base": 1467549673,
+    "percentComplete": 87.56,
+    "conLai": 182549673,
+    "dtOfflineToday": 24651006,
+    "dtOnlineToday": 7730844,
+    "tongDtToday": 32381850,
+    "totalBillsToday": 215
+  },
+  {
+    "rankLuyKe": 14,
+    "rankRetime": 16,
+    "code": "9376",
+    "name": "BHX_AGI_TTO - Lương An Trà (Giồng Cát)",
+    "shortName": "Lương An Trà (Giồng Cát)",
+    "tier": "1.2 Tỷ -> <2 Tỷ",
+    "thucHien": 1138000000,
+    "base": 1305367509,
+    "percentComplete": 87.18,
+    "conLai": 167367509,
+    "dtOfflineToday": 10012708,
+    "dtOnlineToday": 17533419,
+    "tongDtToday": 27546127,
+    "totalBillsToday": 98
+  },
+  {
+    "rankLuyKe": 15,
+    "rankRetime": 17,
+    "code": "27944",
+    "name": "BHX_AGI_VGI - Vĩnh Gia",
+    "shortName": "Vĩnh Gia",
+    "tier": "1.2 Tỷ -> <2 Tỷ",
+    "thucHien": 1075000000,
+    "base": 1237589316,
+    "percentComplete": 86.86,
+    "conLai": 162589316,
+    "dtOfflineToday": 23519632,
+    "dtOnlineToday": 1070371,
+    "tongDtToday": 24590003,
+    "totalBillsToday": 165
+  },
+  {
+    "rankLuyKe": 16,
+    "rankRetime": 18,
+    "code": "15033",
+    "name": "BHX_AGI_LXU - Bình Đức",
+    "shortName": "Bình Đức",
+    "tier": "1.2 Tỷ -> <2 Tỷ",
+    "thucHien": 1012000000,
+    "base": 1203546592,
+    "percentComplete": 84.08,
+    "conLai": 191546592,
+    "dtOfflineToday": 12064402,
+    "dtOnlineToday": 5851793,
+    "tongDtToday": 17916195,
+    "totalBillsToday": 122
+  },
+  {
+    "rankLuyKe": 17,
+    "rankRetime": 10,
+    "code": "29756",
+    "name": "BHX_AGI_VTT - Chợ Kênh 7",
+    "shortName": "Chợ Kênh 7",
+    "tier": "1.2 Tỷ -> <2 Tỷ",
+    "thucHien": 945000000,
+    "base": 1066818791,
+    "percentComplete": 88.58,
+    "conLai": 121818791,
+    "dtOfflineToday": 21209911,
+    "dtOnlineToday": 13343852,
+    "tongDtToday": 34553763,
+    "totalBillsToday": 221
+  },
+  {
+    "rankLuyKe": 18,
+    "rankRetime": 20,
+    "code": "35562",
+    "name": "BHX_AGI_CTO - Chợ Tà Đảnh",
+    "shortName": "Chợ Tà Đảnh",
+    "tier": "1.2 Tỷ -> <2 Tỷ",
+    "thucHien": 852000000,
+    "base": 1000000000,
+    "percentComplete": 85.2,
+    "conLai": 148000000,
+    "dtOfflineToday": 17368586,
+    "dtOnlineToday": 95939,
+    "tongDtToday": 17464525,
+    "totalBillsToday": 168
+  },
+  {
+    "rankLuyKe": 19,
+    "rankRetime": 11,
+    "code": "29909",
+    "name": "BHX_AGI_VHA - Vĩnh Nhuận",
+    "shortName": "Vĩnh Nhuận",
+    "tier": "1.2 Tỷ -> <2 Tỷ",
+    "thucHien": 792000000,
+    "base": 908330767,
+    "percentComplete": 87.19,
+    "conLai": 116330767,
+    "dtOfflineToday": 16296574,
+    "dtOnlineToday": 11286364,
+    "tongDtToday": 27582938,
+    "totalBillsToday": 182
+  },
+  {
+    "rankLuyKe": 20,
+    "rankRetime": 19,
+    "code": "35547",
+    "name": "BHX_AGI_CTO - Chợ Cô Tô",
+    "shortName": "Chợ Cô Tô",
+    "tier": "1.2 Tỷ -> <2 Tỷ",
+    "thucHien": 718000000,
+    "base": 850500000,
+    "percentComplete": 84.42,
+    "conLai": 132500000,
+    "dtOfflineToday": 10233433,
+    "dtOnlineToday": 7248767,
+    "tongDtToday": 17482200,
+    "totalBillsToday": 115
+  },
+  {
+    "rankLuyKe": 21,
+    "rankRetime": 21,
+    "code": "30455",
+    "name": "BHX_AGI_ACU - Văn Giáo",
+    "shortName": "Văn Giáo",
+    "tier": "1.2 Tỷ -> <2 Tỷ",
+    "thucHien": 662000000,
+    "base": 789862611,
+    "percentComplete": 83.81,
+    "conLai": 127862611,
+    "dtOfflineToday": 10309227,
+    "dtOnlineToday": 6476492,
+    "tongDtToday": 16785719,
+    "totalBillsToday": 115
+  }
+];
 
-    // Load from localStorage or default
+    // Load from localStorage or default (with auto-purge for distorted data)
     let supermarkets = [];
     try {
       const saved = localStorage.getItem('bhx_supermarket_data');
       if (saved) {
-        supermarkets = JSON.parse(saved);
-        document.getElementById('custom-data-badge').classList.remove('hidden');
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          supermarkets = parsed.map(s => {
+            const correctBase = OFFICIAL_OCTOBER_BASE[s.code] || s.base;
+            const thucHien = s.thucHien || 0;
+            return {
+              ...s,
+              base: correctBase,
+              percentComplete: correctBase > 0 ? parseFloat((thucHien / correctBase * 100).toFixed(2)) : 0,
+              conLai: Math.max(0, correctBase - thucHien)
+            };
+          });
+          localStorage.setItem('bhx_supermarket_data', JSON.stringify(supermarkets));
+          document.getElementById('custom-data-badge').classList.remove('hidden');
+        } else {
+          supermarkets = [...DEFAULT_SUPERMARKETS];
+        }
+      } else {
+        supermarkets = [...DEFAULT_SUPERMARKETS];
+      }
+    } catch {
+      supermarkets = [...DEFAULT_SUPERMARKETS];
+    } else if (Array.isArray(parsed) && parsed.length > 0) {
+          supermarkets = parsed;
+          document.getElementById('custom-data-badge').classList.remove('hidden');
+        } else {
+          supermarkets = [...DEFAULT_SUPERMARKETS];
+        }
       } else {
         supermarkets = [...DEFAULT_SUPERMARKETS];
       }
@@ -578,6 +1006,10 @@
       document.getElementById('stat-store-count').innerHTML = `${supermarkets.length} / ${supermarkets.length} <span class="text-sm font-normal text-slate-500">Điểm bán</span>`;
       document.getElementById('stat-total-bills').innerHTML = `${totalBills.toLocaleString('vi-VN')} <span class="text-sm font-normal text-slate-500">Hóa đơn</span>`;
       document.getElementById('stat-total-conlai').textContent = formatVND(totalConLai);
+      const avgBills = Math.round(totalBills / (supermarkets.length || 1));
+      if (document.getElementById('stat-avg-bills')) {
+        document.getElementById('stat-avg-bills').textContent = avgBills.toLocaleString('vi-VN') + ' bills/ngày';
+      }
 
       document.getElementById('header-store-count').textContent = `Khu vực Tỉnh An Giang (${supermarkets.length} Siêu thị)`;
       document.getElementById('banner-report-date').textContent = `Ngày ${reportDateStr}`;
@@ -688,53 +1120,203 @@
 
     function initChart() {
       const ctx = document.getElementById('topRevenueChart').getContext('2d');
-      const isLuyKe = chartMode === 'luyke';
+      const filtered = getFilteredData();
+      
+      document.getElementById('chart-store-count').textContent = filtered.length;
 
-      const sorted = [...supermarkets].sort((a, b) => {
-        return isLuyKe ? (b.thucHien - a.thucHien) : (b.tongDtToday - a.tongDtToday);
-      }).slice(0, 8);
+      let displayList = [];
+      if (chartMode === 'luyke') {
+        displayList = [...filtered].sort((a, b) => b.thucHien - a.thucHien);
+      } else if (chartMode === 'today') {
+        displayList = [...filtered].sort((a, b) => b.tongDtToday - a.tongDtToday);
+      } else {
+        displayList = [...filtered].sort((a, b) => b.percentComplete - a.percentComplete);
+      }
 
-      const labels = sorted.map(s => s.shortName || s.name.slice(0, 20));
-      const dataValues = sorted.map(s => isLuyKe ? s.thucHien : s.tongDtToday);
-      const baseValues = sorted.map(s => s.base);
+      const labels = displayList.map(s => s.shortName || s.name.slice(0, 18));
 
-      const datasets = isLuyKe ? [
-        { label: 'Doanh thu Thực hiện (VNĐ)', data: dataValues, backgroundColor: '#007738', borderRadius: 6, barPercentage: 0.65 },
-        { label: 'Chỉ tiêu Base (VNĐ)', data: baseValues, backgroundColor: '#FFC700', borderRadius: 6, barPercentage: 0.65 }
-      ] : [
-        { label: 'DT Offline Hôm nay (VNĐ)', data: sorted.map(s => s.dtOfflineToday), backgroundColor: '#007738', borderRadius: 6, stack: 'today' },
-        { label: 'DT Online Hôm nay (VNĐ)', data: sorted.map(s => s.dtOnlineToday), backgroundColor: '#FFC700', borderRadius: 6, stack: 'today' }
-      ];
+      let datasets = [];
+
+      if (chartMode === 'luyke') {
+        datasets = [
+          {
+            label: 'Chỉ tiêu Base Tháng (VNĐ)',
+            data: displayList.map(s => s.base),
+            backgroundColor: '#cbd5e1',
+            hoverBackgroundColor: '#94a3b8',
+            borderRadius: 6,
+            barPercentage: 0.85,
+            categoryPercentage: 0.82,
+            order: 2
+          },
+          {
+            label: 'Thực hiện Lũy Kế (VNĐ)',
+            data: displayList.map(s => s.thucHien),
+            backgroundColor: '#007738',
+            hoverBackgroundColor: '#005427',
+            borderRadius: 6,
+            barPercentage: 0.85,
+            categoryPercentage: 0.82,
+            isMainResult: true,
+            percentages: displayList.map(s => s.percentComplete),
+            order: 1
+          }
+        ];
+      } else if (chartMode === 'today') {
+        const dayTargets = displayList.map(s => Math.round(s.base / 31));
+        const todayPcts = displayList.map((s, idx) => {
+          const t = dayTargets[idx];
+          return t > 0 ? (s.tongDtToday / t) * 100 : 0;
+        });
+
+        datasets = [
+          {
+            label: 'Target Ngày (Base/31) (VNĐ)',
+            data: dayTargets,
+            backgroundColor: '#fed7aa',
+            hoverBackgroundColor: '#fdba74',
+            borderRadius: 6,
+            barPercentage: 0.85,
+            categoryPercentage: 0.82,
+            order: 2
+          },
+          {
+            label: 'Doanh Thu Retime Hôm Nay (VNĐ)',
+            data: displayList.map(s => s.tongDtToday),
+            backgroundColor: '#007738',
+            hoverBackgroundColor: '#005427',
+            borderRadius: 6,
+            barPercentage: 0.85,
+            categoryPercentage: 0.82,
+            isMainResult: true,
+            percentages: todayPcts,
+            order: 1
+          }
+        ];
+      } else {
+        datasets = [
+          {
+            label: '% Hoàn Thành Base (%)',
+            data: displayList.map(s => s.percentComplete),
+            backgroundColor: displayList.map(s => s.percentComplete >= 90 ? '#007738' : s.percentComplete >= 85 ? '#d97706' : '#dc2626'),
+            borderRadius: 6,
+            barPercentage: 0.65,
+            isMainResult: true,
+            percentages: displayList.map(s => s.percentComplete)
+          }
+        ];
+      }
+
+      const customDataLabelsPlugin = {
+        id: 'customDataLabels',
+        afterDatasetsDraw(chart) {
+          const { ctx } = chart;
+          ctx.save();
+          chart.data.datasets.forEach((dataset, datasetIndex) => {
+            if (dataset.isMainResult && dataset.percentages) {
+              const meta = chart.getDatasetMeta(datasetIndex);
+              meta.data.forEach((bar, index) => {
+                const pct = dataset.percentages[index];
+                if (pct !== undefined && pct !== null) {
+                  const text = pct.toFixed(1) + '%';
+                  ctx.fillStyle = pct >= 90 ? '#005427' : pct >= 85 ? '#b45309' : '#991b1b';
+                  ctx.font = 'bold 9px "Plus Jakarta Sans", sans-serif';
+                  ctx.textAlign = 'center';
+                  ctx.textBaseline = 'bottom';
+                  ctx.fillText(text, bar.x, bar.y - 3);
+                }
+              });
+            }
+          });
+          ctx.restore();
+        }
+      };
 
       if (chartInstance) {
         chartInstance.destroy();
         chartInstance = null;
       }
+
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
       chartInstance = new Chart(ctx, {
         type: 'bar',
         data: { labels, datasets },
+        plugins: [customDataLabelsPlugin],
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          layout: {
+            padding: { top: 22, bottom: 4 }
+          },
+          interaction: {
+            mode: 'index',
+            intersect: false
+          },
           plugins: {
             legend: {
               position: 'top',
-              labels: { font: { family: '"Plus Jakarta Sans"', size: 12, weight: 600 }, color: '#1e293b' }
+              labels: {
+                boxWidth: 14,
+                boxHeight: 14,
+                font: { family: '"Plus Jakarta Sans"', size: 12, weight: 600 },
+                color: '#1e293b'
+              }
             },
             tooltip: {
               backgroundColor: '#0f172a',
+              padding: 12,
+              cornerRadius: 8,
+              titleFont: { family: '"Plus Jakarta Sans"', size: 13, weight: 'bold' },
+              bodyFont: { family: '"JetBrains Mono"', size: 12 },
               callbacks: {
-                label: function(context) { return ` ${context.dataset.label}: ${formatVND(context.raw)}`; }
+                title: function(items) {
+                  if (!items.length) return '';
+                  const idx = items[0].dataIndex;
+                  const store = displayList[idx];
+                  return '[' + store.code + '] ' + store.shortName + ' (' + store.tier + ')';
+                },
+                label: function(context) {
+                  const label = context.dataset.label || '';
+                  const val = context.raw;
+                  if (chartMode === 'percent') return ' ' + label + ': ' + val.toFixed(2) + '%';
+                  return ' ' + label + ': ' + formatVND(val);
+                },
+                afterBody: function(items) {
+                  if (!items.length) return [];
+                  const idx = items[0].dataIndex;
+                  const store = displayList[idx];
+                  const lines = [];
+                  lines.push('---------------------------');
+                  lines.push('Tiến độ lũy kế: ' + store.percentComplete.toFixed(2) + '%');
+                  lines.push('Còn lại: ' + formatVND(store.conLai));
+                  lines.push('Retime hôm nay: ' + formatVND(store.tongDtToday) + ' (' + store.totalBillsToday + ' bills)');
+                  lines.push('  + Offline: ' + (store.dtOfflineToday / 1000000).toFixed(1) + ' Tr · Online: ' + (store.dtOnlineToday / 1000000).toFixed(1) + ' Tr');
+                  return lines;
+                }
               }
             }
           },
           scales: {
-            x: { grid: { display: false } },
+            x: {
+              grid: { display: false },
+              ticks: {
+                font: { family: '"Plus Jakarta Sans"', size: 11, weight: 600 },
+                color: '#334155',
+                maxRotation: 45,
+                minRotation: 35
+              }
+            },
             y: {
               grid: { color: '#f1f5f9' },
-              ticks: { callback: function(val) { return formatShortVND(val); } }
+              ticks: {
+                font: { family: '"JetBrains Mono"', size: 11 },
+                color: '#64748b',
+                callback: function(val) {
+                  if (chartMode === 'percent') return val + '%';
+                  return formatShortVND(val);
+                }
+              }
             }
           }
         }
@@ -774,6 +1356,28 @@
     }
 
     // MODAL LOGIC
+    function downloadSelfIndexHtml() {
+      fetch('/export/index.html')
+        .then(r => r.text())
+        .then(text => triggerDownload(text, 'index.html'))
+        .catch(() => {
+          const doc = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+          triggerDownload(doc, 'index.html');
+        });
+    }
+
+    function triggerDownload(text, filename) {
+      const blob = new Blob([text], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
     function openImportModal() {
       document.getElementById('import-modal').classList.remove('hidden');
       document.getElementById('import-modal').classList.add('flex');
@@ -806,6 +1410,20 @@
       const valid = rows.filter(r => r && r.length > 0 && r.some(c => c !== '' && c !== null && c !== undefined));
       if (!valid.length) throw new Error('Không có dữ liệu hợp lệ');
 
+      function parseDateScore(d) {
+        if (!d) return 0;
+        const parts = String(d).split('/');
+        if (parts.length === 3) {
+          const day = parseInt(parts[0], 10);
+          const month = parseInt(parts[1], 10);
+          const year = parseInt(parts[2], 10);
+          if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
+            return year * 10000 + month * 100 + day;
+          }
+        }
+        return 0;
+      }
+
       let startIdx = 0;
       let colDate = -1;
       let colMa = -1;
@@ -814,6 +1432,8 @@
       let colDtOffline = -1;
       let colDtOnline = -1;
       let colTongBill = -1;
+      let colLuyKe = -1;
+      let colBase = -1;
 
       const r0Text = valid[0].map(c => String(c || '').toLowerCase()).join(' ');
       if (r0Text.includes('ngày') || r0Text.includes('mã đn') || r0Text.includes('mã siêu thị') || r0Text.includes('siêu thị') || r0Text.includes('tên') || r0Text.includes('doanh thu') || isNaN(Number(valid[0][0]))) {
@@ -824,9 +1444,17 @@
           else if (h.includes('mã siêu thị') || h.includes('mã đn') || h === 'mã') colMa = idx;
           else if (h.includes('tên siêu thị') || h.includes('tên đn') || h.includes('tên kho') || h === 'tên') colTen = idx;
           else if (h.includes('loại kho') || h.includes('tier')) colLoaiKho = idx;
-          else if ((h.includes('doanh thu offline') || h.includes('dt offline')) && !h.includes('đã vat') && !h.includes('lũy kế')) colDtOffline = idx;
-          else if ((h.includes('doanh thu online') || h.includes('dt online')) && !h.includes('đã vat') && !h.includes('lũy kế')) colDtOnline = idx;
-          else if ((h.includes('tổng số bill') || h.includes('số bill')) && !h.includes('online')) colTongBill = idx;
+          else if ((h.includes('doanh thu offline') || h.includes('dt offline')) && !h.includes('lũy kế')) {
+            if (!h.includes('đã vat') || colDtOffline === -1) colDtOffline = idx;
+          } else if ((h.includes('doanh thu online') || h.includes('dt online')) && !h.includes('lũy kế')) {
+            if (!h.includes('đã vat') || colDtOnline === -1) colDtOnline = idx;
+          } else if ((h.includes('tổng số bill') || h.includes('số bill')) && !h.includes('online')) {
+            colTongBill = idx;
+          } else if ((h.includes('lũy kế') || h.includes('thực hiện lũy kế') || h.includes('dt lũy kế') || h.includes('cum')) && !h.includes('hôm nay') && !h.includes('%')) {
+            colLuyKe = idx;
+          } else if ((h.includes('target base') || h.includes('kế hoạch base') || h === 'base' || h.includes('chỉ tiêu base') || h.includes('kế hoạch tháng')) && !h.includes('%')) {
+            colBase = idx;
+          }
         });
       }
 
@@ -839,6 +1467,7 @@
 
       const storeMap = new Map();
       let detectedDate = '';
+      let latestScore = 0;
 
       for (let i = startIdx; i < valid.length; i++) {
         const row = valid[i];
@@ -847,7 +1476,7 @@
         const cellStrings = row.map(c => String(c ?? '').trim());
         const rowText = cellStrings.join(' ');
 
-        // Detect code (4-5 digits)
+        // Detect code
         let code = '';
         if (colMa !== -1 && row[colMa]) {
           code = String(row[colMa]).trim();
@@ -861,10 +1490,14 @@
           }
         }
 
+        const masterStore = DEFAULT_SUPERMARKETS.find(s => s.code === code);
+
         // Detect full supermarket name
         let name = '';
         if (colTen !== -1 && row[colTen]) {
           name = String(row[colTen]).trim();
+        } else if (masterStore) {
+          name = masterStore.name;
         } else {
           for (const c of cellStrings) {
             if ((c.includes('BHX') || c.includes('Chợ') || c.includes('Thửa') || c.length > name.length) && !/^\d{2}\/\d{2}\/\d{4}$/.test(c) && !/^\d+$/.test(c)) {
@@ -885,14 +1518,16 @@
             if (m) { rowDate = m[1]; break; }
           }
         }
-        if (rowDate && (!detectedDate || rowDate > detectedDate)) {
+        const score = parseDateScore(rowDate);
+        if (score > latestScore) {
+          latestScore = score;
           detectedDate = rowDate;
         }
 
         // Tier
-        let tier = '1.2 Tỷ -> <2 Tỷ';
+        let tier = masterStore ? masterStore.tier : '1.2 Tỷ -> <2 Tỷ';
         const tierSource = (colLoaiKho !== -1 && row[colLoaiKho]) ? String(row[colLoaiKho]) : rowText;
-        if (tierSource.includes('5 Tỷ') || tierSource.includes('5-8') || tierSource.includes('5 tỷ')) tier = '5 Tỷ -> <8 Tỷ';
+        if (tierSource.includes('5 Tỷ') || tierSource.includes('5-8') || tierSource.includes('5 tỷ') || tierSource.includes('5 tỷ - < 6 tỷ')) tier = '5 Tỷ -> <8 Tỷ';
         else if (tierSource.includes('3 Tỷ') || tierSource.includes('3-5') || tierSource.includes('3 tỷ') || tierSource.includes('2 tỷ')) tier = '3 Tỷ -> <5 Tỷ';
 
         // Extract positive numbers
@@ -907,7 +1542,6 @@
           bills = parseNum(row[colTongBill]);
         }
 
-        // Fallback only if headers were not detected
         if (colDtOffline === -1 || colDtOnline === -1) {
           const nums = [];
           for (let c = 0; c < row.length; c++) {
@@ -924,40 +1558,50 @@
           if (billNums.length >= 1) bills = billNums[0];
         }
 
-        let base = 0;
-        if (tier === '5 Tỷ -> <8 Tỷ') base = 2800000000;
-        else if (tier === '3 Tỷ -> <5 Tỷ') base = 1750000000;
-        else base = 1150000000;
+        const rowTongDt = dtOffline + dtOnline;
 
-        let thucHien = Math.round((dtOffline + dtOnline) * 26);
-        if (thucHien === 0) thucHien = Math.round(base * 0.88);
+        let rowLuyKe = 0;
+        if (colLuyKe !== -1 && row[colLuyKe] !== undefined) {
+          rowLuyKe = parseNum(row[colLuyKe]);
+        }
+        let rowBase = 0;
+        if (colBase !== -1 && row[colBase] !== undefined) {
+          rowBase = parseNum(row[colBase]);
+        }
 
         // Deduplicate into Map
         if (!storeMap.has(code)) {
           storeMap.set(code, {
             code,
             name,
-            shortName: name.replace(/^.*-\s*/, '').replace(/BHX_AGI_\w+\s*-\s*/, '').slice(0, 25),
+            shortName: masterStore ? masterStore.shortName : name.replace(/^.*-\s*/, '').replace(/BHX_AGI_\w+\s*-\s*/, '').slice(0, 25),
             tier,
             latestDate: rowDate || '',
+            latestDateScore: score,
             dtOfflineToday: dtOffline,
             dtOnlineToday: dtOnline,
-            tongDtToday: dtOffline + dtOnline,
-            totalBillsToday: bills || 300,
-            thucHien,
-            base
+            tongDtToday: rowTongDt,
+            totalBillsToday: bills || (masterStore ? masterStore.totalBillsToday : 300),
+            sumDtAllDays: rowTongDt,
+            explicitLuyKe: rowLuyKe,
+            explicitBase: rowBase,
+            rowCount: 1
           });
         } else {
           const it = storeMap.get(code);
-          if (!it.latestDate || (rowDate && rowDate >= it.latestDate)) {
+          it.rowCount++;
+          it.sumDtAllDays += rowTongDt;
+          if (rowLuyKe > 0) it.explicitLuyKe = rowLuyKe;
+          if (rowBase > 0) it.explicitBase = rowBase;
+
+          if (score >= it.latestDateScore) {
+            it.latestDateScore = score;
             it.latestDate = rowDate || it.latestDate;
             if (dtOffline > 0) it.dtOfflineToday = dtOffline;
             if (dtOnline > 0) it.dtOnlineToday = dtOnline;
             it.tongDtToday = it.dtOfflineToday + it.dtOnlineToday;
             if (bills > 0) it.totalBillsToday = bills;
           }
-          if (thucHien > it.thucHien) it.thucHien = thucHien;
-          if (base > it.base) it.base = base;
         }
       }
 
@@ -966,9 +1610,32 @@
       // Convert to clean list
       const finalData = [];
       storeMap.forEach(it => {
-        let thucHien = it.thucHien;
-        if (!thucHien) thucHien = it.tongDtToday > 0 ? it.tongDtToday * 25 : Math.round(it.base * 0.88);
-        let base = it.base || Math.round(thucHien / 0.88);
+        const masterStore = DEFAULT_SUPERMARKETS.find(s => s.code === it.code);
+
+        // Determine Base Target
+        let base = it.explicitBase;
+        if (!base && OFFICIAL_OCTOBER_BASE[it.code]) {
+          base = OFFICIAL_OCTOBER_BASE[it.code];
+        } else if (!base && masterStore) {
+          base = masterStore.base;
+        }
+        if (!base) {
+          if (it.tier === '3 Tỷ -> <5 Tỷ' || it.tier === '5 Tỷ -> <8 Tỷ') base = 2500000000;
+          else base = 1200000000;
+        }
+
+        // Determine Thực Hiện Lũy Kế
+        let thucHien = 0;
+        if (it.explicitLuyKe > 0) {
+          thucHien = it.explicitLuyKe;
+        } else if (it.rowCount > 1) {
+          thucHien = it.sumDtAllDays;
+        } else if (masterStore) {
+          thucHien = masterStore.thucHien;
+        } else {
+          thucHien = it.tongDtToday > 0 ? it.tongDtToday * 25 : Math.round(base * 0.88);
+        }
+
         const pct = base > 0 ? (thucHien / base * 100) : 0;
         const conLai = Math.max(0, base - thucHien);
 
@@ -988,12 +1655,13 @@
         });
       });
 
-      // Sort
+      // Assign Rank Lũy kế
       finalData.sort((a, b) => b.thucHien - a.thucHien);
       finalData.forEach((s, idx) => { s.rankLuyKe = idx + 1; });
 
-      const sortedR = [...finalData].sort((a, b) => b.tongDtToday - a.tongDtToday);
-      sortedR.forEach((s, idx) => {
+      // Assign Rank Retime
+      const sortedRetime = [...finalData].sort((a, b) => b.tongDtToday - a.tongDtToday);
+      sortedRetime.forEach((s, idx) => {
         const found = finalData.find(f => f.code === s.code);
         if (found) found.rankRetime = idx + 1;
       });
@@ -1001,7 +1669,6 @@
       if (detectedDate) {
         document.getElementById('modal-date-input').value = detectedDate;
       }
-
       return finalData;
     }
 
